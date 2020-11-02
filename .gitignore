@@ -1,3 +1,8 @@
+# loading and saving images happen here
+imgs/
+
+# AUTOMATICALLY GENERATED PYTHON TEMPLATE #
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
