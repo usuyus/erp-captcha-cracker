@@ -1,6 +1,7 @@
 import time, os
 import numpy as np
 from PIL import Image
+from PIL.PngImagePlugin import PngImageFile
 
 def timed_func(func):
 	def wrap(*args, **kwargs):
@@ -13,14 +14,19 @@ def timed_func(func):
 	return wrap
 
 def save_img(a, name):
-	if not os.path.exists("../imgs"):
-		os.mkdir("../imgs")
+	if not os.path.exists("imgs"):
+		os.mkdir("imgs")
 
 	if type(a) == np.ndarray:
 		x = np.floor(a / np.max(a) * 255).astype(np.uint8)
-		Image.fromarray(x).save(f"../imgs/{name}.png")
+		Image.fromarray(x).save(f"imgs/{name}.png")
+	elif type(a) == PngImageFile:
+		a.save(f"imgs/{name}.png")
 	else:
-		a.save(f"../imgs/{name}.png")
+		print(f"warning: not supported image \"{name}\"")
 
 def load_img(name):
-	pass
+	try:
+		return Image.open(f"imgs/{name}.png")
+	except FileNotFoundError as e:
+		print(f"warning: couldn't find image \"{name}\"")

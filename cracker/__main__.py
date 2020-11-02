@@ -1,7 +1,8 @@
 from utils import *
-import numpy as np
+from extract_image import load_captcha
 
-a = np.zeros((30,30))
-a[:, :15] = 20
+from PIL import Image
 
-save_img(a, "test")
+img = load_captcha()
+print(type(img) == Image)
+save_img(img, "test")
