@@ -1,13 +1,16 @@
 from utils import *
 from extract_image import load_captcha
 from extract_digits import get_digits
-from test_data import generate_dataset
+from train_model import train_new_model, predict_captcha
 
 from PIL import Image
 
-# img = load_captcha()
+def main(new_img=True):
+	if new_img: img = load_captcha()
+	else: load_img("captcha")
 
-imgs, labels = generate_dataset(1)
+	ds = get_digits(img)
+	print(predict_captcha(ds))
 
-for i, img in zip(range(len(imgs)), imgs):
-	save_img(img.reshape((30,30)), f"{i}")
+
+main()

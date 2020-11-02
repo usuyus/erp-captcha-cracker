@@ -34,4 +34,5 @@ def load_captcha(erp="https://student.robcol.k12.tr/"):
 	driver.quit()
 	
 	img = Image.open(io.BytesIO(base64.b64decode(data)))
+	save_img(img, "captcha")
 	return img
